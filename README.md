@@ -138,3 +138,26 @@ DATABASE_URL="postgresql://postgres:postgres@localhost:5432/digital_card?schema=
 ```
 
 Docker Compose provides its own database URL for the application container.
+
+## Vercel Deployment
+
+This project includes a Vercel serverless entrypoint in `api/index.ts` and routes all requests through it with `vercel.json`.
+
+Before deploying, configure a hosted PostgreSQL database in Vercel:
+
+```env
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=public"
+```
+
+Then run migrations and seed data against that production database:
+
+```bash
+npm run db:migrate
+npm run db:seed
+```
+
+The deployed GraphQL endpoint is available at:
+
+```txt
+https://<your-vercel-domain>/graphql
+```
